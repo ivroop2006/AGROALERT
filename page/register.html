@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Farmer Register - Crop Price Alert System</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6') no-repeat center center/cover;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.register-container{
+background:rgba(0,0,0,0.7);
+padding:40px;
+border-radius:10px;
+width:360px;
+color:white;
+text-align:center;
+}
+
+.register-container h2{
+margin-bottom:25px;
+}
+
+.input-group{
+margin-bottom:18px;
+text-align:left;
+}
+
+.input-group label{
+font-size:14px;
+}
+
+.input-group input{
+width:100%;
+padding:10px;
+margin-top:5px;
+border:none;
+border-radius:5px;
+}
+
+.error{
+color:#ff6b6b;
+font-size:13px;
+margin-top:5px;
+}
+
+.register-btn{
+width:100%;
+padding:12px;
+background:#ffeb3b;
+border:none;
+border-radius:5px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.register-btn:hover{
+background:#fdd835;
+}
+
+.login-link{
+margin-top:15px;
+font-size:14px;
+}
+
+.login-link a{
+color:#ffeb3b;
+text-decoration:none;
+}
+
+.login-link a:hover{
+text-decoration:underline;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="register-container">
+
+<h2 id="title">Farmer Registration</h2>
+
+<form onsubmit="return false;">
+
+<div class="input-group">
+<label>Full Name</label>
+<input id="nameInput" type="text" placeholder="Enter Full Name">
+</div>
+
+<div class="input-group">
+<label>Email or Mobile</label>
+<input id="emailInput" type="text" placeholder="Enter Email or Mobile">
+</div>
+
+<div class="input-group">
+<label>Password</label>
+<input id="passInput" type="password" placeholder="Enter Password">
+</div>
+
+<div class="input-group">
+<label>Confirm Password</label>
+<input id="confirmInput" type="password" placeholder="Confirm Password" onkeyup="checkPassword()">
+<div id="passError" class="error"></div>
+</div>
+
+<div class="input-group">
+<label>Village / District</label>
+<input id="villageInput" type="text" placeholder="Enter Village">
+</div>
+
+<button type="button" class="register-btn" onclick="registerUser()">Register</button>
+
+<p id="successMsg" style="color:lightgreen;font-weight:bold;display:none;"></p>
+
+<div class="login-link">
+Already have an account?
+<a href="login.html">Login Here</a>
+</div>
+
+</form>
+
+</div>
+
+<script>
+
+/* PASSWORD CHECK FUNCTION */
+
+function checkPassword(){
+
+let password=document.getElementById("passInput").value;
+let confirm=document.getElementById("confirmInput").value;
+let error=document.getElementById("passError");
+
+if(confirm===""){
+error.innerHTML="";
+return;
+}
+
+if(password!==confirm){
+error.innerHTML="Passwords do not match";
+}else{
+error.innerHTML="";
+}
+
+}
+
+/* REGISTER FUNCTION */
+
+function registerUser(){
+
+let name=document.getElementById("nameInput").value.trim();
+let email=document.getElementById("emailInput").value.trim();
+let password=document.getElementById("passInput").value.trim();
+let confirm=document.getElementById("confirmInput").value.trim();
+let village=document.getElementById("villageInput").value.trim();
+
+if(name=="" || email=="" || password=="" || confirm=="" || village==""){
+alert("Please fill all fields");
+return;
+}
+
+if(password!==confirm){
+alert("Passwords do not match");
+return;
+}
+
+let formData=new FormData();
+
+formData.append("name",name);
+formData.append("email",email);
+formData.append("password",password);
+formData.append("confirm",confirm);
+formData.append("village",village);
+
+fetch("../backend/api/register.php",{
+method:"POST",
+body:formData
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+if(data.status==="success"){
+
+document.getElementById("successMsg").innerText="Registration Successful";
+document.getElementById("successMsg").style.display="block";
+
+setTimeout(function(){
+window.location.href="login.html";
+},2000);
+
+}else{
+
+alert(data.message);
+
+}
+
+})
+
+.catch(error=>{
+alert("Server error");
+console.log(error);
+});
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Crop Disease Detection</title>
+
+<style>
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+margin:0;
+background:#f4f4f4;
+}
+
+header{
+background:green;
+color:white;
+text-align:center;
+padding:15px;
+font-size:22px;
+}
+
+.container{
+width:90%;
+max-width:600px;
+margin:30px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:10px;
+}
+
+select, input, textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+background:green;
+color:white;
+border:none;
+padding:12px;
+margin-top:15px;
+width:100%;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0a7a0a;
+}
+
+#result{
+margin-top:20px;
+padding:15px;
+background:#e9ffe9;
+border-radius:8px;
+display:none;
+}
+
+.solution{
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header id="header">
+Crop Disease Detection & Solution
+</header>
+
+<div class="container">
+
+<label id="cropLabel">Select Crop</label>
+<select id="crop">
+<option>Wheat</option>
+<option>Rice</option>
+<option>Tomato</option>
+<option>Potato</option>
+<option>Onion</option>
+</select>
+
+<label id="uploadLabel">Upload Crop Image</label>
+<input type="file" id="image">
+
+<label id="problemLabel">Describe Problem</label>
+<textarea id="problem" placeholder="Example: Leaves turning yellow or spots on leaf"></textarea>
+
+<button onclick="detectDisease()" id="checkBtn">Check Disease</button>
+
+<div id="result">
+
+<h3 id="resultTitle">Disease Result</h3>
+
+<p id="diseaseName"></p>
+
+<div class="solution">
+
+<h4 id="solutionTitle">Recommended Solution</h4>
+
+<p id="solutionText"></p>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// language dictionary
+const translations = {
+
+en:{
+header:"Crop Disease Detection & Solution",
+cropLabel:"Select Crop",
+uploadLabel:"Upload Crop Image",
+problemLabel:"Describe Problem",
+problemPlaceholder:"Example: Leaves turning yellow or spots on leaf",
+checkBtn:"Check Disease",
+resultTitle:"Disease Result",
+solutionTitle:"Recommended Solution",
+cropText:"Crop: ",
+diseaseText:"Disease: ",
+yellowDisease:"Leaf Yellowing Disease",
+yellowSolution:"Use nitrogen fertilizer and proper irrigation. Spray neem oil to protect leaves.",
+spotDisease:"Leaf Spot Disease",
+spotSolution:"Spray copper fungicide and remove infected leaves.",
+pestDisease:"Pest Attack",
+pestSolution:"Use organic pesticide or neem oil spray every 7 days.",
+unknownDisease:"Disease not identified",
+unknownSolution:"Consult agriculture expert or upload clearer crop image."
+},
+
+hi:{
+header:"फसल रोग पहचान और समाधान",
+cropLabel:"फसल चुनें",
+uploadLabel:"फसल की तस्वीर अपलोड करें",
+problemLabel:"समस्या का विवरण दें",
+problemPlaceholder:"उदाहरण: पत्ते पीले हो रहे हैं या पत्तों पर धब्बे हैं",
+checkBtn:"रोग जांचें",
+resultTitle:"रोग परिणाम",
+solutionTitle:"सुझाया गया समाधान",
+cropText:"फसल: ",
+diseaseText:"रोग: ",
+yellowDisease:"पत्ती पीली होने की बीमारी",
+yellowSolution:"नाइट्रोजन उर्वरक और सही सिंचाई का उपयोग करें। पत्तों की सुरक्षा के लिए नीम तेल स्प्रे करें।",
+spotDisease:"पत्ती धब्बा रोग",
+spotSolution:"कॉपर फंगीसाइड का छिड़काव करें और संक्रमित पत्तों को हटाएँ।",
+pestDisease:"कीट हमला",
+pestSolution:"जैविक कीटनाशक या हर 7 दिन में नीम तेल स्प्रे करें।",
+unknownDisease:"रोग की पहचान नहीं हुई",
+unknownSolution:"कृषि विशेषज्ञ से सलाह लें या स्पष्ट तस्वीर अपलोड करें।"
+},
+
+mr:{
+header:"पीक रोग ओळख व उपाय",
+cropLabel:"पीक निवडा",
+uploadLabel:"पीक फोटो अपलोड करा",
+problemLabel:"समस्या लिहा",
+problemPlaceholder:"उदा: पाने पिवळी होत आहेत किंवा पानांवर डाग आहेत",
+checkBtn:"रोग तपासा",
+resultTitle:"रोग परिणाम",
+solutionTitle:"सुचवलेला उपाय",
+cropText:"पीक: ",
+diseaseText:"रोग: ",
+yellowDisease:"पान पिवळेपणा रोग",
+yellowSolution:"नायट्रोजन खत वापरा आणि योग्य सिंचन करा. पानांसाठी नीम तेल स्प्रे करा.",
+spotDisease:"पान डाग रोग",
+spotSolution:"कॉपर फंगीसाइड फवारणी करा आणि संक्रमित पाने काढा.",
+pestDisease:"कीड हल्ला",
+pestSolution:"सेंद्रिय कीटकनाशक किंवा दर 7 दिवसांनी नीम तेल फवारणी करा.",
+unknownDisease:"रोग ओळखला गेला नाही",
+unknownSolution:"कृषी तज्ञांचा सल्ला घ्या किंवा स्पष्ट फोटो अपलोड करा."
+}
+
+};
+
+// get selected language
+let lang = localStorage.getItem("selectedLanguage") || "en";
+
+function applyLanguage(){
+
+let t = translations[lang];
+
+document.getElementById("header").innerText=t.header;
+document.getElementById("cropLabel").innerText=t.cropLabel;
+document.getElementById("uploadLabel").innerText=t.uploadLabel;
+document.getElementById("problemLabel").innerText=t.problemLabel;
+document.getElementById("problem").placeholder=t.problemPlaceholder;
+document.getElementById("checkBtn").innerText=t.checkBtn;
+document.getElementById("resultTitle").innerText=t.resultTitle;
+document.getElementById("solutionTitle").innerText=t.solutionTitle;
+
+}
+
+applyLanguage();
+
+
+function detectDisease(){
+
+let crop=document.getElementById("crop").value;
+let problem=document.getElementById("problem").value.toLowerCase();
+
+let t=translations[lang];
+
+let disease="";
+let solution="";
+
+if(problem.includes("yellow")){
+disease=t.yellowDisease;
+solution=t.yellowSolution;
+}
+
+else if(problem.includes("spots")){
+disease=t.spotDisease;
+solution=t.spotSolution;
+}
+
+else if(problem.includes("pest")){
+disease=t.pestDisease;
+solution=t.pestSolution;
+}
+
+else{
+disease=t.unknownDisease;
+solution=t.unknownSolution;
+}
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("diseaseName").innerHTML=
+t.cropText+crop+"<br>"+t.diseaseText+disease;
+
+document.getElementById("solutionText").innerHTML=solution;
+
+}
+
+</script>
+
+</body>
+</html>

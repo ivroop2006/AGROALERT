@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Farmer Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f0fff0;
+}
+
+/* Top Navigation */
+
+.topnav{
+background:green;
+color:white;
+padding:12px;
+display:flex;
+align-items:center;
+}
+
+.menu-icon{
+font-size:24px;
+cursor:pointer;
+margin-right:15px;
+}
+
+.title{
+font-size:20px;
+}
+
+.lang-select{
+margin-left:auto;
+padding:5px;
+border-radius:5px;
+border:none;
+}
+
+/* Side Menu */
+
+.sidemenu{
+height:100%;
+width:0;
+position:fixed;
+top:0;
+left:0;
+background:green;
+overflow-x:hidden;
+transition:0.3s;
+padding-top:60px;
+}
+
+.sidemenu a{
+padding:12px 25px;
+text-decoration:none;
+font-size:18px;
+color:white;
+display:block;
+}
+
+.sidemenu a:hover{
+background:#0a5e0a;
+}
+
+.close-btn{
+position:absolute;
+top:10px;
+right:20px;
+font-size:30px;
+cursor:pointer;
+}
+
+/* Container */
+
+.container{
+text-align:center;
+padding:40px;
+}
+
+h1{
+color:green;
+}
+
+/* Cards */
+
+.cards{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+margin-top:40px;
+}
+
+.card{
+background:white;
+width:220px;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px lightgray;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card a{
+display:block;
+margin-top:10px;
+text-decoration:none;
+background:green;
+color:white;
+padding:10px;
+border-radius:5px;
+}
+
+/* Footer */
+
+footer{
+margin-top:50px;
+background:green;
+color:white;
+text-align:center;
+padding:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Top Nav -->
+
+<div class="topnav">
+
+<span class="menu-icon" onclick="openMenu()">
+<i class="fa-solid fa-bars"></i>
+</span>
+
+<span class="title" id="menuText">Menu</span>
+
+<select class="lang-select" id="languageSelect" onchange="changeLanguage(this.value)">
+<option value="en">English</option>
+<option value="hi">Hindi</option>
+<option value="mr">Marathi</option>
+</select>
+
+</div>
+
+<!-- Side Menu -->
+
+<div id="mySidemenu" class="sidemenu">
+
+<span class="close-btn" onclick="closeMenu()">&times;</span>
+
+<a href="/crop_price_alert_system/home.html">
+<i class="fa-solid fa-house"></i>
+<span id="homeText">Home</span>
+</a>
+
+<a href="/crop_price_alert_system/page/profile.html">
+<i class="fa-solid fa-user"></i>
+<span id="profileText">Profile</span>
+</a>
+
+<a href="/crop_price_alert_system/page/information.html">
+<i class="fa-solid fa-info-circle"></i>
+<span id="aboutText">About</span>
+</a>
+
+<a href="/crop_price_alert_system/page/service.html">
+<i class="fa-solid fa-briefcase"></i>
+<span id="servicesText">Services</span>
+</a>
+
+<a href="/crop_price_alert_system/page/contact_us.html">
+<i class="fa-solid fa-envelope"></i>
+<span id="contactText">Contact</span>
+</a>
+
+<a href="/crop_price_alert_system/logout.html">
+<i class="fa-solid fa-arrow-right"></i>
+<span id="logoutText">Logout</span>
+</a>
+
+</div>
+
+<!-- Dashboard -->
+
+<div class="container">
+
+<h1 id="dashboardTitle">Farmer Dashboard</h1>
+
+<div class="cards">
+
+<div class="card">
+<h3 id="priceTitle">📈 Live Prices</h3>
+<a href="/crop_price_alert_system/page/prices.html" id="priceBtn">Check Prices</a>
+</div>
+
+<div class="card">
+<h3 id="alertTitle">🔔 Price Alerts</h3>
+<a href="page/setalerts.html" id="alertBtn">Set Alert</a>
+</div>
+
+<div class="card">
+<h3 id="profitTitle">💰 Profit Calculator</h3>
+<a href="/crop_price_alert_system/page/calculater.html" id="profitBtn">Calculate</a>
+</div>
+
+<div class="card">
+<h3 id="weatherTitle">☀️ Weather</h3>
+<a href="/crop_price_alert_system/page/weather.html" id="weatherBtn">View Weather</a>
+</div>
+
+<div class="card">
+<h3 id="chatTitle">💬 Chat with Farmers</h3>
+<a href="/crop_price_alert_system/page/chat.html" id="chatBtn">Open Chat</a>
+</div>
+
+<div class="card">
+<h3 id="qualityTitle">🏅 Check Quality</h3>
+<a href="/crop_price_alert_system/page/check_quality.html" id="qualityBtn">Check</a>
+</div>
+
+<div class="card">
+<h3 id="sellTitle">🛒 Direct Sell</h3>
+<a href="/crop_price_alert_system/page/direct_sell.html" id="sellBtn">Sell Crop</a>
+</div>
+
+<div class="card">
+<h3 id="diseaseTitle">🔬 Disease Detection</h3>
+<a href="/crop_price_alert_system/page/detect_disease.html" id="diseaseBtn">Detect</a>
+</div>
+
+<div class="card">
+<h3 id="voiceTitle">🎤 Voice Assistant</h3>
+<a href="/crop_price_alert_system/page/voice_assistant.html" id="voiceBtn">Search</a>
+</div>
+
+<div class="card">
+<h3 id="feedbackTitle">⭐ Feedback</h3>
+<a href="/crop_price_alert_system/page/feedback.html" id="feedbackBtn">Give Feedback</a>
+</div>
+
+<div class="card">
+<h3 id="newsTitle">🏪 Market Schemes</h3>
+<a href="/crop_price_alert_system/page/farmerschemes.html" id="newsBtn">View Schemes</a>
+</div>
+
+</div>
+</div>
+
+<script>
+
+/* Side Menu */
+
+function openMenu(){
+document.getElementById("mySidemenu").style.width="250px";
+}
+
+function closeMenu(){
+document.getElementById("mySidemenu").style.width="0";
+}
+
+/* Language Translations */
+
+const translations = {
+
+en:{
+menuText:"Menu",
+homeText:"Home",
+profileText:"Profile",
+aboutText:"About",
+servicesText:"Services",
+contactText:"Contact",
+logoutText:"Logout",
+dashboardTitle:"Farmer Dashboard",
+
+priceTitle:"📈 Live Prices",
+priceBtn:"Check Prices",
+
+alertTitle:"🔔 Price Alerts",
+alertBtn:"Set Alert",
+
+profitTitle:"💰 Profit Calculator",
+profitBtn:"Calculate",
+
+weatherTitle:"☀️ Weather",
+weatherBtn:"View Weather",
+
+chatTitle:"💬 Chat with Farmers",
+chatBtn:"Open Chat",
+
+qualityTitle:"🏅 Check Quality",
+qualityBtn:"Check",
+
+sellTitle:"🛒 Direct Sell",
+sellBtn:"Sell Crop",
+
+diseaseTitle:"🔬 Disease Detection",
+diseaseBtn:"Detect",
+
+voiceTitle:"🎤 Voice Assistant",
+voiceBtn:"Search",
+
+feedbackTitle:"⭐ Feedback",
+feedbackBtn:"Give Feedback",
+
+newsTitle:"🏪 Market Schemes",
+newsBtn:"View Schemes"
+},
+
+hi:{
+menuText:"मेनू",
+homeText:"मुख्य पृष्ठ",
+profileText:"प्रोफ़ाइल",
+aboutText:"जानकारी",
+servicesText:"सेवाएं",
+contactText:"संपर्क",
+logoutText:"लॉग आउट",
+dashboardTitle:"किसान डैशबोर्ड",
+
+priceTitle:"📈 लाइव कीमतें",
+priceBtn:"कीमत देखें",
+
+alertTitle:"🔔 मूल्य अलर्ट",
+alertBtn:"अलर्ट सेट करें",
+
+profitTitle:"💰 लाभ कैलकुलेटर",
+profitBtn:"गणना करें",
+
+weatherTitle:"☀️ मौसम",
+weatherBtn:"मौसम देखें",
+
+chatTitle:"💬 किसान चैट",
+chatBtn:"चैट खोलें",
+
+qualityTitle:"🏅 गुणवत्ता जांच",
+qualityBtn:"जांच करें",
+
+sellTitle:"🛒 सीधे बेचें",
+sellBtn:"फसल बेचें",
+
+diseaseTitle:"🔬 रोग पहचान",
+diseaseBtn:"जांच करें",
+
+voiceTitle:"🎤 वॉयस असिस्टेंट",
+voiceBtn:"खोजें",
+
+feedbackTitle:"⭐ प्रतिक्रिया",
+feedbackBtn:"प्रतिक्रिया दें",
+
+newsTitle:"🏪 किसान योजना",
+newsBtn:"योजना देखें"
+},
+
+mr:{
+menuText:"मेनू",
+homeText:"मुख्यपृष्ठ",
+profileText:"प्रोफाइल",
+aboutText:"माहिती",
+servicesText:"सेवा",
+contactText:"संपर्क",
+logoutText:"लॉग आउट",
+dashboardTitle:"शेतकरी डॅशबोर्ड",
+
+priceTitle:"📈 थेट दर",
+priceBtn:"दर पहा",
+
+alertTitle:"🔔 किंमत सूचना",
+alertBtn:"अलर्ट सेट करा",
+
+profitTitle:"💰 नफा कॅल्क्युलेटर",
+profitBtn:"गणना करा",
+
+weatherTitle:"☀️ हवामान",
+weatherBtn:"हवामान पहा",
+
+chatTitle:"💬 शेतकरी गप्पा",
+chatBtn:"चॅट उघडा",
+
+qualityTitle:"🏅 गुणवत्ता तपासा",
+qualityBtn:"तपासा",
+
+sellTitle:"🛒 थेट विक्री",
+sellBtn:"पिक विक्री करा",
+
+diseaseTitle:"🔬 रोग ओळख",
+diseaseBtn:"तपासा",
+
+voiceTitle:"🎤 व्हॉइस सहाय्यक",
+voiceBtn:"शोधा",
+
+feedbackTitle:"⭐ अभिप्राय",
+feedbackBtn:"अभिप्राय द्या",
+
+newsTitle:"🏪 शेतकरी योजना",
+newsBtn:"योजना पहा"
+}
+
+};
+
+/* Change Language */
+
+function changeLanguage(lang){
+
+localStorage.setItem("language",lang);
+
+for(let key in translations[lang]){
+let elem=document.getElementById(key);
+if(elem){
+elem.innerText=translations[lang][key];
+}
+}
+
+}
+
+/* Load Saved Language */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+let lang=localStorage.getItem("language") || "en";
+
+document.getElementById("languageSelect").value=lang;
+
+changeLanguage(lang);
+
+});
+
+</script>
+
+</body>
+</html>

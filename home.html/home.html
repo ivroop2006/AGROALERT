@@ -1,0 +1,240 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Crop Price Alert System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0fff0;
+}
+
+nav {
+    background-color: green;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    color: green;
+    font-size: 40px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: green;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px lightgray;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: green;
+    color: white;
+}
+
+#language{
+padding:5px;
+border-radius:5px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2 id="navTitle">🌾 Crop Price Alert</h2>
+
+<ul>
+<li><a id="loginLink" href="../page/login.html">Login</a></li>
+<li><a id="registerLink" href="../page/register.html">Register</a></li>
+</ul>
+
+<select id="language" onchange="setLanguage(this.value)">
+<option value="en">English</option>
+<option value="hi">Hindi</option>
+<option value="mr">Marathi</option>
+</select>
+
+</nav>
+
+<section class="hero">
+
+<h1 id="welcomeText">Welcome Farmer 🌾</h1>
+
+<p id="descText">
+Get real-time crop prices and smart profit calculation.
+</p>
+
+<a id="startBtn" href="../page/register.html" class="btn">
+Get Started
+</a>
+
+</section>
+
+<section class="features">
+
+<div class="card">
+<h3 id="livePriceText">📈 Live Prices</h3>
+<p id="liveDesc">Check updated market crop prices.</p>
+</div>
+
+<div class="card">
+<h3 id="alertText">🔔 Smart Alerts</h3>
+<p id="alertDesc">
+Get notified when prices increase or decrease.
+</p>
+</div>
+
+<div class="card">
+<h3 id="profitText">💰 Profit Calculator</h3>
+<p id="profitDesc">
+Calculate your crop profit easily.
+</p>
+</div>
+
+</section>
+
+<footer id="footerText">
+© 2026 Crop Price Alert System | Designed for Farmers
+</footer>
+
+<script>
+
+function setLanguage(lang){
+
+localStorage.setItem("language",lang);
+
+if(lang==="en"){
+
+document.getElementById("navTitle").innerHTML="🌾 Crop Price Alert"
+document.getElementById("loginLink").innerHTML="Login"
+document.getElementById("registerLink").innerHTML="Register"
+
+document.getElementById("welcomeText").innerHTML="Welcome Farmer 🌾"
+document.getElementById("descText").innerHTML="Get real-time crop prices and smart profit calculation."
+document.getElementById("startBtn").innerHTML="Get Started"
+
+document.getElementById("livePriceText").innerHTML="📈 Live Prices"
+document.getElementById("liveDesc").innerHTML="Check updated market crop prices."
+
+document.getElementById("alertText").innerHTML="🔔 Smart Alerts"
+document.getElementById("alertDesc").innerHTML="Get notified when prices increase or decrease."
+
+document.getElementById("profitText").innerHTML="💰 Profit Calculator"
+document.getElementById("profitDesc").innerHTML="Calculate your crop profit easily."
+
+document.getElementById("footerText").innerHTML="© 2026 Crop Price Alert System | Designed for Farmers"
+
+}
+
+else if(lang==="hi"){
+
+document.getElementById("navTitle").innerHTML="🌾 फसल मूल्य अलर्ट"
+
+document.getElementById("loginLink").innerHTML="लॉगिन"
+document.getElementById("registerLink").innerHTML="रजिस्टर"
+
+document.getElementById("welcomeText").innerHTML="किसान का स्वागत है 🌾"
+document.getElementById("descText").innerHTML="रियल टाइम फसल की कीमतें और लाभ गणना प्राप्त करें"
+document.getElementById("startBtn").innerHTML="शुरू करें"
+
+document.getElementById("livePriceText").innerHTML="📈 लाइव कीमतें"
+document.getElementById("liveDesc").innerHTML="बाजार में फसल की नवीनतम कीमतें देखें"
+
+document.getElementById("alertText").innerHTML="🔔 स्मार्ट अलर्ट"
+document.getElementById("alertDesc").innerHTML="कीमत बढ़ने या घटने पर सूचना प्राप्त करें"
+
+document.getElementById("profitText").innerHTML="💰 लाभ कैलकुलेटर"
+document.getElementById("profitDesc").innerHTML="अपनी फसल का लाभ आसानी से गणना करें"
+
+document.getElementById("footerText").innerHTML="© 2026 फसल मूल्य अलर्ट सिस्टम | किसानों के लिए"
+
+}
+
+else if(lang==="mr"){
+
+document.getElementById("navTitle").innerHTML="🌾 पीक दर सूचना"
+
+document.getElementById("loginLink").innerHTML="लॉगिन"
+document.getElementById("registerLink").innerHTML="नोंदणी"
+
+document.getElementById("welcomeText").innerHTML="शेतकऱ्यांचे स्वागत आहे 🌾"
+document.getElementById("descText").innerHTML="रिअल टाइम पिकांचे दर आणि नफा गणना मिळवा"
+document.getElementById("startBtn").innerHTML="सुरू करा"
+
+document.getElementById("livePriceText").innerHTML="📈 थेट दर"
+document.getElementById("liveDesc").innerHTML="बाजारातील पिकांचे दर त्वरित तपासा"
+
+document.getElementById("alertText").innerHTML="🔔 स्मार्ट सूचना"
+document.getElementById("alertDesc").innerHTML="दर वाढल्यास किंवा कमी झाल्यास सूचना मिळवा"
+
+document.getElementById("profitText").innerHTML="💰 नफा कॅल्क्युलेटर"
+document.getElementById("profitDesc").innerHTML="तुमचा पिकांचा नफा सहज मोजा"
+
+document.getElementById("footerText").innerHTML="© 2026 पीक दर सूचना प्रणाली | शेतकऱ्यांसाठी"
+
+}
+
+}
+
+window.onload=function(){
+
+var savedLang=localStorage.getItem("language")
+
+if(savedLang){
+document.getElementById("language").value=savedLang
+setLanguage(savedLang)
+}
+
+}
+
+</script>
+
+</body>
+</html>
+```

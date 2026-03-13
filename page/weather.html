@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Forecast</title>
+
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0;
+    background:#f4f4f4;
+}
+
+header{
+    background:green;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:22px;
+}
+
+.container{
+    width:90%;
+    max-width:500px;
+    margin:30px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+input{
+    width:70%;
+    padding:10px;
+    margin-top:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    background:green;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#0a7a0a;
+}
+
+.weather-box{
+    margin-top:20px;
+    padding:15px;
+    background:#e9ffe9;
+    border-radius:8px;
+    display:none;
+}
+</style>
+
+</head>
+<body>
+
+<header id="header">Crop Price Alert System - Weather Forecast</header>
+
+<div class="container">
+
+<h2 id="title">Check Weather</h2>
+
+<input type="text" id="city" placeholder="Enter city name">
+
+<br>
+
+<button id="checkBtn" onclick="getWeather()">Check Weather</button>
+
+<div class="weather-box" id="weatherBox">
+    <h3 id="cityName"></h3>
+    <p id="temperature"></p>
+    <p id="humidity"></p>
+    <p id="condition"></p>
+</div>
+
+</div>
+
+<script>
+// Translation dictionary
+const translations = {
+    "en": {
+        "header": "Crop Price Alert System - Weather Forecast",
+        "title": "Check Weather",
+        "cityPlaceholder": "Enter city name",
+        "checkBtn": "Check Weather",
+        "cityText": "City: ",
+        "tempText": "Temperature: ",
+        "humidityText": "Humidity: ",
+        "conditionText": "Weather: "
+    },
+    "hi": {
+        "header": "फसल मूल्य अलर्ट सिस्टम - मौसम पूर्वानुमान",
+        "title": "मौसम जाँचें",
+        "cityPlaceholder": "शहर का नाम दर्ज करें",
+        "checkBtn": "मौसम जाँचें",
+        "cityText": "शहर: ",
+        "tempText": "तापमान: ",
+        "humidityText": "नमी: ",
+        "conditionText": "मौसम: "
+    },
+    "mr": {
+        "header": "पीक किंमत अलर्ट सिस्टम - हवामान अंदाज",
+        "title": "हवामान तपासा",
+        "cityPlaceholder": "शहराचे नाव टाका",
+        "checkBtn": "हवामान तपासा",
+        "cityText": "शहर: ",
+        "tempText": "तापमान: ",
+        "humidityText": "आर्द्रता: ",
+        "conditionText": "हवामान: "
+    }
+};
+
+// Get language from previous page
+let lang = localStorage.getItem("selectedLanguage") || "en";
+
+// Function to apply language
+function applyLanguage(lang){
+    const t = translations[lang];
+    document.getElementById("header").innerText = t.header;
+    document.getElementById("title").innerText = t.title;
+    document.getElementById("city").placeholder = t.cityPlaceholder;
+    document.getElementById("checkBtn").innerText = t.checkBtn;
+}
+
+// Apply language on page load
+applyLanguage(lang);
+
+// Weather function
+function getWeather(){
+    let city = document.getElementById("city").value;
+    if(!city) return;
+
+    let temperature = Math.floor(Math.random()*15)+25;
+    let humidity = Math.floor(Math.random()*40)+40;
+    let conditions = ["Sunny","Cloudy","Rainy","Windy","Partly Cloudy"];
+    let condition = conditions[Math.floor(Math.random()*conditions.length)];
+
+    document.getElementById("weatherBox").style.display = "block";
+    document.getElementById("cityName").innerHTML = translations[lang].cityText + city;
+    document.getElementById("temperature").innerHTML = translations[lang].tempText + temperature + " °C";
+    document.getElementById("humidity").innerHTML = translations[lang].humidityText + humidity + "%";
+    document.getElementById("condition").innerHTML = translations[lang].conditionText + condition;
+}
+</script>
+
+</body>
+</html>

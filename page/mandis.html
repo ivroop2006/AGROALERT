@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nearby Mandis</title>
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+}
+header {
+    background: green;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+.lang {
+    text-align: center;
+    margin-top: 15px;
+}
+select {
+    padding: 8px;
+    font-size: 16px;
+}
+table {
+    width: 80%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background: white;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background: #2e7d32;
+    color: white;
+}
+#message {
+    text-align: center;
+    color: red;
+    font-size: 18px;
+    margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h2 id="title">Nearby Mandis</h2>
+</header>
+
+<div class="lang">
+<select id="language" onchange="changeLanguage()">
+<option value="en">English</option>
+<option value="mr">Marathi</option>
+<option value="hi">Hindi</option>
+</select>
+</div>
+
+<div id="message"></div>
+
+<table>
+<tr>
+<th id="col1">ID</th>
+<th id="col2">Mandi Name</th>
+<th id="col3">Latitude</th>
+<th id="col4">Longitude</th>
+</tr>
+<tbody id="mandiBody"></tbody>
+</table>
+
+<script>
+// Translation data
+const text = {
+    en: {
+        title: "Nearby Mandis",
+        id: "ID",
+        name: "Mandi Name",
+        lat: "Latitude",
+        long: "Longitude",
+        nodata: "No mandi data found in database",
+        error: "Error loading mandi data"
+    },
+    mr: {
+        title: "जवळच्या मंड्या",
+        id: "आयडी",
+        name: "मंडीचे नाव",
+        lat: "अक्षांश",
+        long: "रेखांश",
+        nodata: "डेटाबेसमध्ये मंडी माहिती उपलब्ध नाही",
+        error: "मंडी डेटा लोड करताना त्रुटी"
+    },
+    hi: {
+        title: "नजदीकी मंडियां",
+        id: "आईडी",
+        name: "मंडी का नाम",
+        lat: "अक्षांश",
+        long: "देशांतर",
+        nodata: "डेटाबेस में मंडी डेटा नहीं मिला",
+        error: "मंडी डेटा लोड करने में त्रुटि"
+    }
+};
+
+// Change headers and messages when language changes
+function changeLanguage(){
+    let lang = document.getElementById("language").value;
+    document.getElementById("title").innerText = text[lang].title;
+    document.getElementById("col1").innerText = text[lang].id;
+    document.getElementById("col2").innerText = text[lang].name;
+    document.getElementById("col3").innerText = text[lang].lat;
+    document.getElementById("col4").innerText = text[lang].long;
+}
+
+// Fetch mandis
+function loadMandis(){
+    fetch("../backend/api/mandis.php")
+    .then(res => res.json())
+    .then(data => {
+        let body = document.getElementById("mandiBody");
+        body.innerHTML = ""; // clear previous rows
+        let lang = document.getElementById("language").value;
+        if(data.length === 0){
+            document.getElementById("message").innerText = text[lang].nodata;
+            return;
+        } else {
+            document.getElementById("message").innerText = "";
+        }
+        data.forEach(mandi => {
+            let row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${mandi.id}</td>
+                <td>${mandi.mandi_name}</td>
+                <td>${mandi.latitude}</td>
+                <td>${mandi.longitude}</td>
+            `;
+            body.appendChild(row);
+        });
+    })
+    .catch(err => {
+        let lang = document.getElementById("language").value;
+        document.getElementById("message").innerText = text[lang].error;
+        console.error(err);
+    });
+}
+
+// Initial load
+window.onload = () => {
+    changeLanguage();
+    loadMandis();
+};
+</script>
+
+</body>
+</html>

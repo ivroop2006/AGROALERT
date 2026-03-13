@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Profit Calculator</title>
+
+<style>
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+margin:0;
+background:#f4f4f4;
+}
+
+header{
+background:green;
+color:white;
+padding:15px;
+text-align:center;
+font-size:22px;
+}
+
+.container{
+padding:20px;
+max-width:500px;
+margin:auto;
+background:white;
+margin-top:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+margin-top:20px;
+width:100%;
+padding:12px;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+font-size:16px;
+cursor:pointer;
+}
+
+.result{
+margin-top:20px;
+font-size:18px;
+font-weight:bold;
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<header id="title"></header>
+
+<div class="container">
+
+<label id="costLabel"></label>
+<input type="number" id="cost">
+
+<label id="sellLabel"></label>
+<input type="number" id="sell">
+
+<button onclick="calculateProfit()" id="btn"></button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+
+<script>
+
+let lang = localStorage.getItem("language") || "en";
+
+let text = {
+
+en:{
+title:"Profit Calculator",
+cost:"Total Crop Cost",
+sell:"Total Selling Price",
+button:"Calculate Profit",
+profit:"Your Profit is",
+loss:"Your Loss is"
+},
+
+hi:{
+title:"लाभ कैलकुलेटर",
+cost:"कुल फसल लागत",
+sell:"कुल बिक्री मूल्य",
+button:"लाभ गणना करें",
+profit:"आपका लाभ है",
+loss:"आपका नुकसान है"
+},
+
+mr:{
+title:"नफा कॅल्क्युलेटर",
+cost:"एकूण पीक खर्च",
+sell:"एकूण विक्री किंमत",
+button:"नफा मोजा",
+profit:"तुमचा नफा आहे",
+loss:"तुमचे नुकसान आहे"
+}
+
+};
+
+
+document.getElementById("title").innerText = text[lang].title;
+document.getElementById("costLabel").innerText = text[lang].cost;
+document.getElementById("sellLabel").innerText = text[lang].sell;
+document.getElementById("btn").innerText = text[lang].button;
+
+
+function calculateProfit(){
+
+let cost = document.getElementById("cost").value;
+let sell = document.getElementById("sell").value;
+
+let resultBox = document.getElementById("result");
+
+let profit = sell - cost;
+
+if(profit >= 0){
+
+resultBox.innerText = text[lang].profit + " : ₹" + profit;
+
+}
+else{
+
+resultBox.innerText = text[lang].loss + " : ₹" + Math.abs(profit);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

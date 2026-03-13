@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Search Crop & Voice Assistant</title>
+
+<style>
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+margin:0;
+background:#f4f4f4;
+}
+
+header{
+background:green;
+color:white;
+text-align:center;
+padding:15px;
+font-size:24px;
+}
+
+.container{
+width:400px;
+margin:40px auto;
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h3{
+text-align:center;
+}
+
+input{
+width:70%;
+padding:8px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+padding:8px 12px;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:darkgreen;
+}
+
+#result{
+margin-top:20px;
+font-weight:bold;
+text-align:center;
+color:green;
+}
+
+</style>
+</head>
+
+<body>
+
+<header id="header">
+Crop Price Alert System
+</header>
+
+<div class="container">
+
+<h3 id="title">Search Crop Price</h3>
+
+<input type="text" id="searchCrop" placeholder="Enter crop name">
+
+<button onclick="searchCrop()" id="searchBtn">Search</button>
+
+<button onclick="startVoice()">🎤</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+// Crop price data
+let cropPrices={
+"wheat":"₹2200 per quintal",
+"rice":"₹2500 per quintal",
+"cotton":"₹6200 per quintal",
+"soybean":"₹4500 per quintal",
+"onion":"₹1800 per quintal"
+};
+
+// Language dictionary
+const translations={
+
+en:{
+header:"Crop Price Alert System",
+title:"Search Crop Price",
+placeholder:"Enter crop name",
+searchBtn:"Search",
+priceText:"price is",
+notFound:"Crop price not found",
+voiceLang:"en-US"
+},
+
+hi:{
+header:"फसल मूल्य अलर्ट सिस्टम",
+title:"फसल का भाव खोजें",
+placeholder:"फसल का नाम दर्ज करें",
+searchBtn:"खोजें",
+priceText:"की कीमत है",
+notFound:"फसल का भाव नहीं मिला",
+voiceLang:"hi-IN"
+},
+
+mr:{
+header:"पीक किंमत अलर्ट सिस्टम",
+title:"पीक किंमत शोधा",
+placeholder:"पीक नाव टाका",
+searchBtn:"शोधा",
+priceText:"ची किंमत आहे",
+notFound:"पीक किंमत सापडली नाही",
+voiceLang:"mr-IN"
+}
+
+};
+
+// get selected language
+let lang=localStorage.getItem("selectedLanguage") || "en";
+
+function applyLanguage(){
+
+let t=translations[lang];
+
+document.getElementById("header").innerText=t.header;
+document.getElementById("title").innerText=t.title;
+document.getElementById("searchCrop").placeholder=t.placeholder;
+document.getElementById("searchBtn").innerText=t.searchBtn;
+
+}
+
+applyLanguage();
+
+function searchCrop(){
+
+let crop=document.getElementById("searchCrop").value.toLowerCase();
+let result=document.getElementById("result");
+let t=translations[lang];
+
+if(cropPrices[crop]){
+result.innerHTML=crop+" "+t.priceText+" "+cropPrices[crop];
+}
+else{
+result.innerHTML=t.notFound;
+}
+
+}
+
+function startVoice(){
+
+let recognition=new(window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+recognition.lang=translations[lang].voiceLang;
+
+recognition.start();
+
+recognition.onresult=function(event){
+
+let voiceText=event.results[0][0].transcript;
+
+document.getElementById("searchCrop").value=voiceText.toLowerCase();
+
+searchCrop();
+
+};
+
+}
+
+</script>
+
+</body>
+</html>

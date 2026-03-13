@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logout - Crop Price Alert System</title>
+
+<style>
+
+body{
+margin:0;
+font-family: Arial, Helvetica, sans-serif;
+background:#f4f4f4;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.logout-box{
+background:white;
+padding:40px;
+text-align:center;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+h2{
+color:green;
+}
+
+button{
+background:red;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:5px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:darkred;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="logout-box">
+
+<h2 id="title">You have successfully logged out</h2>
+
+<p id="msg">Thank you for using Crop Price Alert System</p>
+
+<button id="btn" onclick="logout()">Go to Logout</button>
+
+</div>
+
+<script>
+
+function logout(){
+alert(text.logoutAlert);
+window.location.href="file:///C:/xampp/htdocs/crop_price_alert_system/logout.html";
+}
+
+let text = {
+title:"",
+msg:"",
+btn:"",
+logoutAlert:""
+};
+
+let lang = localStorage.getItem("lang") || "en";
+
+if(lang === "hi"){
+text.title = "आप सफलतापूर्वक लॉग आउट हो गए हैं";
+text.msg = "क्रॉप प्राइस अलर्ट सिस्टम का उपयोग करने के लिए धन्यवाद";
+text.btn = "लॉगिन पेज पर जाएं";
+text.logoutAlert = "लॉग आउट सफल";
+}
+
+else if(lang === "mr"){
+text.title = "तुम्ही यशस्वीपणे लॉगआउट झाला आहात";
+text.msg = "क्रॉप प्राइस अलर्ट सिस्टम वापरल्याबद्दल धन्यवाद";
+text.btn = "लॉगिन पेजवर जा";
+text.logoutAlert = "लॉगआउट यशस्वी";
+}
+
+else{
+text.title = "You have successfully logged out";
+text.msg = "Thank you for using Crop Price Alert System";
+text.btn = "Go to Logout";
+text.logoutAlert = "Logout Successful";
+}
+
+document.getElementById("title").innerText = text.title;
+document.getElementById("msg").innerText = text.msg;
+document.getElementById("btn").innerText = text.btn;
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Crop Price Alert System - Information</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f4f4;
+}
+
+header{
+background:green;
+color:white;
+padding:15px;
+text-align:center;
+font-size:24px;
+}
+
+.container{
+padding:20px;
+}
+
+.section{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:6px;
+box-shadow:0 0 5px rgba(0,0,0,0.2);
+}
+
+h2{
+color:green;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header id="title"></header>
+
+<div class="container">
+
+<div class="section">
+<h2 id="aboutTitle"></h2>
+<p id="aboutText"></p>
+</div>
+
+<div class="section">
+<h2 id="processTitle"></h2>
+<p id="processText"></p>
+</div>
+
+<div class="section">
+<h2 id="rulesTitle"></h2>
+<p id="rulesText"></p>
+</div>
+
+<div class="section">
+<h2 id="benefitsTitle"></h2>
+<p id="benefitsText"></p>
+</div>
+
+</div>
+
+<script>
+
+/* Get language from previous page */
+var lang = localStorage.getItem("language");
+
+/* Default language */
+if(!lang){
+lang="en";
+}
+
+/* Marathi */
+
+if(lang=="mr"){
+
+document.getElementById("title").innerText="पीक किंमत सूचना प्रणाली - माहिती";
+
+document.getElementById("aboutTitle").innerText="अ‍ॅप बद्दल माहिती";
+document.getElementById("aboutText").innerText="पीक किंमत सूचना प्रणाली हे शेतकऱ्यांना बाजारातील पिकांच्या किमती पाहण्यासाठी आणि योग्य वेळी पीक विकण्यासाठी मदत करणारे स्मार्ट अ‍ॅप आहे.";
+
+document.getElementById("processTitle").innerText="सिस्टम कसे काम करते";
+document.getElementById("processText").innerText="शेतकरी अ‍ॅपमध्ये नोंदणी करतात आणि त्यांना पाहायची असलेली पिके निवडतात. सिस्टम बाजारातील किंमती तपासत राहते आणि किंमत ठराविक मर्यादेला पोहोचल्यावर सूचना पाठवते.";
+
+document.getElementById("rulesTitle").innerText="अ‍ॅपचे नियम";
+document.getElementById("rulesText").innerText="नोंदणी करताना शेतकऱ्यांनी योग्य माहिती द्यावी. किंमत सूचना नियमित तपासाव्यात आणि पीक विकण्यापूर्वी स्थानिक बाजारात किंमत तपासावी.";
+
+document.getElementById("benefitsTitle").innerText="शेतकऱ्यांसाठी फायदे";
+document.getElementById("benefitsText").innerText="ही प्रणाली शेतकऱ्यांना चांगला बाजारभाव मिळविण्यास, नुकसान कमी करण्यास आणि योग्य वेळी पीक विकण्याचा निर्णय घेण्यास मदत करते.";
+
+}
+
+/* Hindi */
+
+else if(lang=="hi"){
+
+document.getElementById("title").innerText="फसल मूल्य अलर्ट सिस्टम - जानकारी";
+
+document.getElementById("aboutTitle").innerText="एप्लिकेशन के बारे में";
+document.getElementById("aboutText").innerText="फसल मूल्य अलर्ट सिस्टम किसानों की मदद के लिए बनाया गया एक स्मार्ट एप्लिकेशन है जो विभिन्न बाजारों में फसल की कीमतों को ट्रैक करता है।";
+
+document.getElementById("processTitle").innerText="सिस्टम कैसे काम करता है";
+document.getElementById("processText").innerText="किसान सिस्टम में पंजीकरण करते हैं और जिन फसलों की कीमत देखनी है उन्हें चुनते हैं। सिस्टम बाजार की कीमतों को जांचता रहता है और कीमत लक्ष्य तक पहुंचने पर सूचना भेजता है।";
+
+document.getElementById("rulesTitle").innerText="एप्लिकेशन के नियम";
+document.getElementById("rulesText").innerText="किसानों को पंजीकरण करते समय सही जानकारी देनी चाहिए और फसल बेचने से पहले बाजार में कीमत की पुष्टि करनी चाहिए।";
+
+document.getElementById("benefitsTitle").innerText="किसानों के लिए लाभ";
+document.getElementById("benefitsText").innerText="यह सिस्टम किसानों को बेहतर बाजार मूल्य प्राप्त करने, नुकसान कम करने और सही समय पर फसल बेचने का निर्णय लेने में मदद करता है।";
+
+}
+
+/* English */
+
+else{
+
+document.getElementById("title").innerText="Crop Price Alert System - Information";
+
+document.getElementById("aboutTitle").innerText="About the Application";
+document.getElementById("aboutText").innerText="Crop Price Alert System is a smart application designed to help farmers track crop prices in different markets.";
+
+document.getElementById("processTitle").innerText="How the System Works";
+document.getElementById("processText").innerText="Farmers register in the system and select crops they want to monitor. The system checks market prices and sends alerts when prices reach the target value.";
+
+document.getElementById("rulesTitle").innerText="Application Rules";
+document.getElementById("rulesText").innerText="Farmers should provide correct information during registration and verify market prices before selling crops.";
+
+document.getElementById("benefitsTitle").innerText="Benefits for Farmers";
+document.getElementById("benefitsText").innerText="This system helps farmers get better prices, reduce losses, and make better selling decisions.";
+
+}
+
+</script>
+
+</body>
+</html>

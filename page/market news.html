@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Daily Market Updates</title>
+
+<style>
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+margin:0;
+background:#f4f4f4;
+}
+
+header{
+background:green;
+color:white;
+text-align:center;
+padding:15px;
+font-size:24px;
+}
+
+.container{
+width:80%;
+margin:30px auto;
+}
+
+.news-card{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:6px;
+box-shadow:0 0 8px rgba(0,0,0,0.1);
+}
+
+.news-card h3{
+color:green;
+}
+
+.date{
+font-size:14px;
+color:gray;
+}
+
+</style>
+</head>
+
+<body>
+
+<header id="header">
+Crop Price Alert System - Daily Market News
+</header>
+
+<div class="container">
+
+<div class="news-card">
+<h3 id="n1"></h3>
+<p class="date" id="d1"></p>
+<p id="p1"></p>
+</div>
+
+<div class="news-card">
+<h3 id="n2"></h3>
+<p class="date" id="d2"></p>
+<p id="p2"></p>
+</div>
+
+<div class="news-card">
+<h3 id="n3"></h3>
+<p class="date" id="d3"></p>
+<p id="p3"></p>
+</div>
+
+<div class="news-card">
+<h3 id="n4"></h3>
+<p class="date" id="d4"></p>
+<p id="p4"></p>
+</div>
+
+</div>
+
+<script>
+
+// Language dictionary
+const translations = {
+
+en:{
+header:"Crop Price Alert System - Daily Market News",
+date:"Date: ",
+news:[
+{
+title:"Soybean Price Increased in Market",
+desc:"Soybean prices increased by ₹200 per quintal due to high demand in mandi markets."
+},
+{
+title:"Onion Supply Increased",
+desc:"Large quantity of onions arrived in the market which may reduce prices in the coming days."
+},
+{
+title:"Cotton Market Stable",
+desc:"Cotton prices remain stable this week with steady demand from textile industries."
+},
+{
+title:"Government Announces New Farmer Scheme",
+desc:"The government announced a new support scheme for farmers to improve crop storage facilities."
+}
+]
+},
+
+hi:{
+header:"फसल मूल्य अलर्ट सिस्टम - दैनिक बाजार समाचार",
+date:"तारीख: ",
+news:[
+{
+title:"सोयाबीन की कीमतों में वृद्धि",
+desc:"मंडी बाजारों में अधिक मांग के कारण सोयाबीन की कीमत ₹200 प्रति क्विंटल बढ़ी।"
+},
+{
+title:"प्याज की आपूर्ति बढ़ी",
+desc:"बाजार में बड़ी मात्रा में प्याज आने से आने वाले दिनों में कीमत कम हो सकती है।"
+},
+{
+title:"कपास बाजार स्थिर",
+desc:"इस सप्ताह कपास की कीमतें स्थिर हैं और वस्त्र उद्योग से मांग बनी हुई है।"
+},
+{
+title:"सरकार ने नई किसान योजना की घोषणा की",
+desc:"सरकार ने किसानों के लिए फसल भंडारण सुविधा सुधारने के लिए नई योजना घोषित की है।"
+}
+]
+},
+
+mr:{
+header:"पीक किंमत अलर्ट सिस्टम - दैनिक बाजार बातम्या",
+date:"तारीख: ",
+news:[
+{
+title:"सोयाबीन किंमतीत वाढ",
+desc:"मंडई बाजारात जास्त मागणीमुळे सोयाबीनची किंमत ₹200 प्रति क्विंटलने वाढली."
+},
+{
+title:"कांद्याचा पुरवठा वाढला",
+desc:"बाजारात मोठ्या प्रमाणात कांदा आल्यामुळे पुढील काही दिवसांत किंमत कमी होऊ शकते."
+},
+{
+title:"कापूस बाजार स्थिर",
+desc:"या आठवड्यात कापसाच्या किंमती स्थिर असून वस्त्रोद्योगाकडून मागणी कायम आहे."
+},
+{
+title:"सरकारने नवीन शेतकरी योजना जाहीर केली",
+desc:"सरकारने पिक साठवण सुविधा सुधारण्यासाठी शेतकऱ्यांसाठी नवीन योजना जाहीर केली."
+}
+]
+}
+
+};
+
+// get selected language
+let lang = localStorage.getItem("selectedLanguage") || "en";
+
+function applyLanguage(){
+
+let t = translations[lang];
+
+document.getElementById("header").innerText=t.header;
+
+document.getElementById("n1").innerText=t.news[0].title;
+document.getElementById("p1").innerText=t.news[0].desc;
+document.getElementById("d1").innerText=t.date+"10 March 2026";
+
+document.getElementById("n2").innerText=t.news[1].title;
+document.getElementById("p2").innerText=t.news[1].desc;
+document.getElementById("d2").innerText=t.date+"10 March 2026";
+
+document.getElementById("n3").innerText=t.news[2].title;
+document.getElementById("p3").innerText=t.news[2].desc;
+document.getElementById("d3").innerText=t.date+"10 March 2026";
+
+document.getElementById("n4").innerText=t.news[3].title;
+document.getElementById("p4").innerText=t.news[3].desc;
+document.getElementById("d4").innerText=t.date+"9 March 2026";
+
+}
+
+applyLanguage();
+
+</script>
+
+</body>
+</html>

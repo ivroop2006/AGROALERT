@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Maharashtra Crop Prices (Simulated)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;font-family:Arial;background:#f0fff0;}
+nav{background:green;color:white;padding:15px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;}
+nav a{color:white;text-decoration:none;margin-left:15px;font-weight:bold;}
+nav select{margin-left:10px;padding:5px;}
+.container{padding:40px;text-align:center;}
+h1{color:green;}
+.regionBox{margin-bottom:20px;}
+table{margin:auto;border-collapse:collapse;width:90%;background:white;box-shadow:0 0 10px lightgray;}
+th,td{padding:12px;border:1px solid #ddd;text-align:center;}
+th{background:green;color:white;}
+tr:nth-child(even){background:#f9f9f9;}
+#status{margin-top:15px;color:gray;}
+footer{margin-top:40px;padding:15px;background:green;color:white;text-align:center;}
+</style>
+</head>
+<body>
+
+<nav>
+<h2>🌾 Smart Kisan</h2>
+<div>
+<a href="index.html">Home</a>
+<a href="prices.html">Prices</a>
+<a href="profit.html">Calculator</a>
+<select id="language" onchange="changeLanguage()">
+<option value="en">English</option>
+<option value="hi">Hindi</option>
+<option value="mr">Marathi</option>
+</select>
+</div>
+</nav>
+
+<div class="container">
+<h1 id="heading">📈 Live Maharashtra Crop Prices (Simulated)</h1>
+
+<div class="regionBox">
+<label id="districtLabel">Select District:</label>
+<select id="district" onchange="loadPrices()"></select>
+
+<label id="cropLabel" style="margin-left:20px;">Select Crop:</label>
+<select id="cropSelect" onchange="loadPrices()"></select>
+</div>
+
+<table>
+<tr>
+<th id="crop">Crop</th>
+<th id="market">Market</th>
+<th id="price">Price (₹)</th>
+<th id="date">Date</th>
+</tr>
+<tbody id="priceTable"></tbody>
+</table>
+
+<p id="status">Loading prices...</p>
+</div>
+
+<footer>© 2026 Smart Kisan System</footer>
+
+<script>
+// Districts & crops
+const districts = ["Pune","Solapur","Nagpur","Nashik","Kolhapur","Aurangabad"];
+const crops = ["Wheat","Rice","Sugarcane","Cotton","Onion","Tomato","Maize"];
+
+// District-wise markets
+const districtMarkets = {
+  "Pune":["Pune Mandi 1","Pune Mandi 2","Pune Mandi 3"],
+  "Solapur":["Solapur Mandi 1","Solapur Mandi 2","Solapur Mandi 3"],
+  "Nagpur":["Nagpur Mandi 1","Nagpur Mandi 2","Nagpur Mandi 3"],
+  "Nashik":["Nashik Mandi 1","Nashik Mandi 2","Nashik Mandi 3"],
+  "Kolhapur":["Kolhapur Mandi 1","Kolhapur Mandi 2","Kolhapur Mandi 3"],
+  "Aurangabad":["Aurangabad Mandi 1","Aurangabad Mandi 2","Aurangabad Mandi 3"]
+};
+
+let allRecords = [];
+
+// Generate random prices for simulation
+function generateRandomData(){
+  allRecords = [];
+  districts.forEach(district => {
+    crops.forEach(crop => {
+      districtMarkets[district].forEach(market=>{
+        allRecords.push({
+          state: "Maharashtra",
+          district: district,
+          commodity: crop,
+          market: market,
+          modal_price: Math.floor(Math.random()*9000)+1000, // 1000-10000
+          arrival_date: new Date().toLocaleDateString()
+        });
+      });
+    });
+  });
+}
+
+// Populate dropdowns
+function populateDropdowns(){
+  const districtSelect = document.getElementById("district");
+  const cropSelect = document.getElementById("cropSelect");
+
+  districtSelect.innerHTML = districts.map(d => `<option value="${d}">${d}</option>`).join("");
+  cropSelect.innerHTML = crops.map(c => `<option value="${c}">${c}</option>`).join("");
+}
+
+// Load prices based on selected district & crop
+function loadPrices(){
+  const district = document.getElementById("district").value;
+  const crop = document.getElementById("cropSelect").value;
+  const table = document.getElementById("priceTable");
+  const status = document.getElementById("status");
+
+  table.innerHTML = "";
+
+  const records = allRecords.filter(r => r.district===district && r.commodity===crop);
+
+  if(records.length===0){
+    status.innerHTML = `No prices found for ${crop} in ${district}`;
+    return;
+  }
+
+  records.forEach(item=>{
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${item.commodity}</td>
+      <td>${item.market}</td>
+      <td>₹ ${item.modal_price}</td>
+      <td>${item.arrival_date}</td>
+    `;
+    table.appendChild(row);
+  });
+
+  status.innerHTML = `Showing simulated prices for ${crop} in ${district}, Maharashtra`;
+}
+
+// Language system
+function changeLanguage(){
+  let lang = document.getElementById("language").value;
+  localStorage.setItem("language", lang);
+  applyLanguage(lang);
+}
+
+function applyLanguage(lang){
+  const heading = document.getElementById("heading");
+  const cropTh = document.getElementById("crop");
+  const marketTh = document.getElementById("market");
+  const priceTh = document.getElementById("price");
+  const dateTh = document.getElementById("date");
+  const districtLabel = document.getElementById("districtLabel");
+  const cropLabel = document.getElementById("cropLabel");
+
+  if(lang==="en"){
+    heading.innerHTML="📈 Live Maharashtra Crop Prices (Simulated)";
+    cropTh.innerHTML="Crop";
+    marketTh.innerHTML="Market";
+    priceTh.innerHTML="Price (₹)";
+    dateTh.innerHTML="Date";
+    districtLabel.innerHTML="Select District:";
+    cropLabel.innerHTML="Select Crop:";
+  } else if(lang==="hi"){
+    heading.innerHTML="📈 लाइव महाराष्ट्र फसल बाजार कीमतें (सिम्युलेटेड)";
+    cropTh.innerHTML="फसल";
+    marketTh.innerHTML="बाजार";
+    priceTh.innerHTML="कीमत (₹)";
+    dateTh.innerHTML="तारीख";
+    districtLabel.innerHTML="जिला चुनें:";
+    cropLabel.innerHTML="फसल चुनें:";
+  } else if(lang==="mr"){
+    heading.innerHTML="📈 थेट महाराष्ट्र पीक बाजार दर (सिम्युलेटेड)";
+    cropTh.innerHTML="पीक";
+    marketTh.innerHTML="बाजार";
+    priceTh.innerHTML="दर (₹)";
+    dateTh.innerHTML="तारीख";
+    districtLabel.innerHTML="जिल्हा निवडा:";
+    cropLabel.innerHTML="पीक निवडा:";
+  }
+}
+
+// Initialize
+window.onload = function(){
+  let savedLang = localStorage.getItem("language");
+  if(savedLang){
+    document.getElementById("language").value = savedLang;
+    applyLanguage(savedLang);
+  }
+  generateRandomData();
+  populateDropdowns();
+  loadPrices();
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crop Selling Feedback</title>
+
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0;
+    background:#f4f4f4;
+}
+
+header{
+    background:green;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:24px;
+}
+
+.container{
+    width:400px;
+    margin:40px auto;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+label{
+    font-weight:bold;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:8px;
+    margin:8px 0 15px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    background:green;
+    color:white;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:darkgreen;
+}
+
+#message{
+    text-align:center;
+    color:green;
+    font-weight:bold;
+    margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header id="header">
+Crop Price Alert System - Feedback
+</header>
+
+<div class="container">
+
+<h3 id="formTitle">Farmer Crop Selling Feedback</h3>
+
+<form id="feedbackForm">
+
+<label id="labelName">Farmer Name</label>
+<input type="text" id="name" required>
+
+<label id="labelCrop">Crop Name</label>
+<input type="text" id="crop" required>
+
+<label id="labelMarket">Market Name</label>
+<input type="text" id="market" required>
+
+<label id="labelRating">Rating</label>
+<select id="rating">
+<option>Excellent</option>
+<option>Good</option>
+<option>Average</option>
+<option>Poor</option>
+</select>
+
+<label id="labelFeedback">Feedback Message</label>
+<textarea id="feedback" rows="4" required></textarea>
+
+<button type="submit" id="submitBtn">Submit Feedback</button>
+
+</form>
+
+<p id="message"></p>
+
+</div>
+
+<script>
+// Translation dictionary
+const translations = {
+    "en": {
+        "header": "Crop Price Alert System - Feedback",
+        "formTitle": "Farmer Crop Selling Feedback",
+        "labelName": "Farmer Name",
+        "labelCrop": "Crop Name",
+        "labelMarket": "Market Name",
+        "labelRating": "Rating",
+        "ratingOptions": ["Excellent","Good","Average","Poor"],
+        "labelFeedback": "Feedback Message",
+        "submitBtn": "Submit Feedback",
+        "thankYou": "Thank you! Your feedback has been submitted."
+    },
+    "hi": {
+        "header": "फसल मूल्य अलर्ट सिस्टम - प्रतिक्रिया",
+        "formTitle": "किसान फसल बिक्री प्रतिक्रिया",
+        "labelName": "किसान का नाम",
+        "labelCrop": "फसल का नाम",
+        "labelMarket": "बाजार का नाम",
+        "labelRating": "रेटिंग",
+        "ratingOptions": ["उत्कृष्ट","अच्छा","औसत","खराब"],
+        "labelFeedback": "प्रतिक्रिया संदेश",
+        "submitBtn": "प्रतिक्रिया जमा करें",
+        "thankYou": "धन्यवाद! आपकी प्रतिक्रिया जमा कर दी गई है।"
+    },
+    "mr": {
+        "header": "पीक किंमत अलर्ट सिस्टम - अभिप्राय",
+        "formTitle": "शेतकरी पीक विक्री अभिप्राय",
+        "labelName": "शेतकऱ्याचे नाव",
+        "labelCrop": "पीक नाव",
+        "labelMarket": "बाजाराचे नाव",
+        "labelRating": "रेटिंग",
+        "ratingOptions": ["उत्कृष्ट","चांगले","सरासरी","वाईट"],
+        "labelFeedback": "अभिप्राय संदेश",
+        "submitBtn": "अभिप्राय सादर करा",
+        "thankYou": "धन्यवाद! तुमचा अभिप्राय सादर केला गेला आहे."
+    }
+};
+
+// Example: get language from previous page (can use localStorage, query string, or default to English)
+let lang = localStorage.getItem("selectedLanguage") || "en";
+
+// Function to update the text based on language
+function applyLanguage(lang) {
+    const t = translations[lang];
+    document.getElementById("header").innerText = t.header;
+    document.getElementById("formTitle").innerText = t.formTitle;
+    document.getElementById("labelName").innerText = t.labelName;
+    document.getElementById("labelCrop").innerText = t.labelCrop;
+    document.getElementById("labelMarket").innerText = t.labelMarket;
+    document.getElementById("labelRating").innerText = t.labelRating;
+    document.getElementById("labelFeedback").innerText = t.labelFeedback;
+    document.getElementById("submitBtn").innerText = t.submitBtn;
+
+    // Update rating options
+    const ratingSelect = document.getElementById("rating");
+    ratingSelect.innerHTML = "";
+    t.ratingOptions.forEach(option => {
+        const opt = document.createElement("option");
+        opt.text = option;
+        ratingSelect.add(opt);
+    });
+}
+
+applyLanguage(lang);
+
+// Form submit
+document.getElementById("feedbackForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("message").innerText = translations[lang].thankYou;
+    document.getElementById("feedbackForm").reset();
+});
+</script>
+
+</body>
+</html>

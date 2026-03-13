@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Profile - Crop Price Alert System</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f4f4;
+}
+
+header{
+background:green;
+color:white;
+padding:15px;
+text-align:center;
+font-size:24px;
+}
+
+.container{
+padding:20px;
+}
+
+.profile-card{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 0 6px rgba(0,0,0,0.2);
+}
+
+.profile-item{
+margin-bottom:15px;
+}
+
+label{
+font-weight:bold;
+color:green;
+}
+
+input, textarea{
+width:100%;
+padding:8px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.photo-preview{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+margin-top:10px;
+border:2px solid green;
+}
+
+button{
+margin-top:15px;
+width:100%;
+padding:10px;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0a7a0a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header id="title"></header>
+
+<div class="container">
+
+<form id="profileForm">
+
+<div class="profile-card">
+
+<!-- Photo Upload -->
+
+<div class="profile-item">
+<label id="photoLabel"></label>
+<input type="file" accept="image/*" onchange="previewPhoto(event)">
+<img id="photoPreview" class="photo-preview">
+</div>
+
+<div class="profile-item">
+<label id="nameLabel"></label>
+<input type="text" required>
+</div>
+
+<div class="profile-item">
+<label id="mobileLabel"></label>
+<input type="text" required>
+</div>
+
+<div class="profile-item">
+<label id="villageLabel"></label>
+<input type="text">
+</div>
+
+<div class="profile-item">
+<label id="addressLabel"></label>
+<textarea rows="3"></textarea>
+</div>
+
+<div class="profile-item">
+<label id="cropLabel"></label>
+<input type="text">
+</div>
+
+<div class="profile-item">
+<label id="marketLabel"></label>
+<input type="text">
+</div>
+
+<button type="submit" id="saveBtn"></button>
+
+</div>
+
+</form>
+
+</div>
+
+<script>
+
+/* Photo Preview */
+
+function previewPhoto(event){
+var reader = new FileReader();
+reader.onload = function(){
+document.getElementById("photoPreview").src = reader.result;
+}
+reader.readAsDataURL(event.target.files[0]);
+}
+
+/* Language from previous page */
+
+var lang = localStorage.getItem("language");
+
+if(!lang){
+lang="en";
+}
+
+/* Marathi */
+
+if(lang=="mr"){
+
+document.getElementById("title").innerText="प्रोफाइल - पीक किंमत सूचना प्रणाली";
+
+document.getElementById("photoLabel").innerText="प्रोफाइल फोटो";
+document.getElementById("nameLabel").innerText="शेतकऱ्याचे नाव";
+document.getElementById("mobileLabel").innerText="मोबाईल नंबर";
+document.getElementById("villageLabel").innerText="गाव";
+document.getElementById("addressLabel").innerText="पत्ता";
+document.getElementById("cropLabel").innerText="पीक नाव";
+document.getElementById("marketLabel").innerText="बाजार नाव";
+
+document.getElementById("saveBtn").innerText="माहिती जतन करा";
+
+}
+
+/* Hindi */
+
+else if(lang=="hi"){
+
+document.getElementById("title").innerText="प्रोफाइल - फसल मूल्य अलर्ट सिस्टम";
+
+document.getElementById("photoLabel").innerText="प्रोफाइल फोटो";
+document.getElementById("nameLabel").innerText="किसान का नाम";
+document.getElementById("mobileLabel").innerText="मोबाइल नंबर";
+document.getElementById("villageLabel").innerText="गांव";
+document.getElementById("addressLabel").innerText="पता";
+document.getElementById("cropLabel").innerText="फसल का नाम";
+document.getElementById("marketLabel").innerText="बाजार का नाम";
+
+document.getElementById("saveBtn").innerText="जानकारी सेव करें";
+
+}
+
+/* English */
+
+else{
+
+document.getElementById("title").innerText="Profile - Crop Price Alert System";
+
+document.getElementById("photoLabel").innerText="Profile Photo";
+document.getElementById("nameLabel").innerText="Farmer Name";
+document.getElementById("mobileLabel").innerText="Mobile Number";
+document.getElementById("villageLabel").innerText="Village";
+document.getElementById("addressLabel").innerText="Address";
+document.getElementById("cropLabel").innerText="Crop Name";
+document.getElementById("marketLabel").innerText="Market Name";
+
+document.getElementById("saveBtn").innerText="Submit Profile";
+
+}
+
+/* Submit Form */
+
+document.getElementById("profileForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+if(lang=="mr"){
+alert("प्रोफाइल माहिती यशस्वीरित्या जतन झाली");
+}
+else if(lang=="hi"){
+alert("प्रोफाइल जानकारी सफलतापूर्वक सेव हुई");
+}
+else{
+alert("Profile Information Saved Successfully");
+}
+
+});
+
+</script>
+
+</body>
+</html>

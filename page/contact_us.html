@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - Crop Price Alert System</title>
+
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0;
+    background:#f2f2f2;
+}
+
+header{
+    background:green;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:24px;
+}
+
+.container{
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:15px;
+    border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+
+h2{
+    color:green;
+}
+
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    margin-bottom:12px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    background:green;
+    color:white;
+    border:none;
+    padding:10px;
+    width:100%;
+    font-size:16px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0b7a0b;
+}
+
+.language-switch{
+    margin:10px 0;
+    text-align:right;
+}
+
+.language-switch button{
+    width:auto;
+    padding:5px 10px;
+    margin-left:5px;
+    font-size:14px;
+    border-radius:4px;
+}
+</style>
+</head>
+
+<body>
+
+<header id="header-title">Contact Us</header>
+
+<div class="container">
+
+<!-- Language Switch -->
+<div class="language-switch">
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('mr')">मराठी</button>
+    <button onclick="setLanguage('hi')">हिन्दी</button>
+</div>
+
+<!-- Support Info -->
+<div class="card">
+<h2 id="support-title">Support Contact Details</h2>
+<p><b>Email:</b> <span id="email-text">pnimbalkar623@gmail.com</span></p>
+<p><b>Phone:</b> <span id="phone-text">+91 9579341210</span></p>
+<p><b>Office Address:</b> <span id="address-text">Agriculture Support Center, Maharashtra, India</span></p>
+</div>
+
+<!-- Contact Form -->
+<div class="card">
+<h2 id="form-title">Send Message</h2>
+
+<form action="https://formsubmit.co/pnimbalkar623@gmail.com" method="POST">
+
+<label id="label-name">Your Name</label>
+<input type="text" name="name" placeholder="Enter your name" required>
+
+<label id="label-email">Email</label>
+<input type="email" name="email" placeholder="Enter your email" required>
+
+<label id="label-mobile">Mobile Number</label>
+<input type="text" name="mobile" placeholder="Enter your mobile number" required>
+
+<label id="label-message">Your Message</label>
+<textarea name="message" rows="4" placeholder="Write your message" required></textarea>
+
+<!-- Hidden fields for FormSubmit -->
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_subject" value="New message from Crop Price Alert System">
+<input type="hidden" name="_next" value="contact_us.html">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_autoresponse" value="Thank you for contacting Crop Price Alert System. We will respond soon.">
+
+<button type="submit" id="submit-btn">Send Message</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+// Language translations
+const translations = {
+    en: {
+        header: "Contact Us",
+        supportTitle: "Support Contact Details",
+        emailText: "pnimbalkar623@gmail.com",
+        phoneText: "+91 9579341210",
+        addressText: "Agriculture Support Center, Maharashtra, India",
+        formTitle: "Send Message",
+        labelName: "Your Name",
+        labelEmail: "Email",
+        labelMobile: "Mobile Number",
+        labelMessage: "Your Message",
+        submitBtn: "Send Message"
+    },
+    mr: {
+        header: "आमच्याशी संपर्क साधा",
+        supportTitle: "संपर्क तपशील",
+        emailText: "pnimbalkar623@gmail.com",
+        phoneText: "+91 9579341210",
+        addressText: "कृषी सहाय्य केंद्र, महाराष्ट्र, भारत",
+        formTitle: "संदेश पाठवा",
+        labelName: "तुमचे नाव",
+        labelEmail: "ईमेल",
+        labelMobile: "मोबाइल क्रमांक",
+        labelMessage: "तुमचा संदेश",
+        submitBtn: "संदेश पाठवा"
+    },
+    hi: {
+        header: "संपर्क करें",
+        supportTitle: "संपर्क विवरण",
+        emailText: "pnimbalkar623@gmail.com",
+        phoneText: "+91 9579341210",
+        addressText: "कृषि सहायता केंद्र, महाराष्ट्र, भारत",
+        formTitle: "संदेश भेजें",
+        labelName: "आपका नाम",
+        labelEmail: "ईमेल",
+        labelMobile: "मोबाइल नंबर",
+        labelMessage: "आपका संदेश",
+        submitBtn: "संदेश भेजें"
+    }
+};
+
+// Function to switch language
+function setLanguage(lang){
+    document.getElementById('header-title').innerText = translations[lang].header;
+    document.getElementById('support-title').innerText = translations[lang].supportTitle;
+    document.getElementById('email-text').innerText = translations[lang].emailText;
+    document.getElementById('phone-text').innerText = translations[lang].phoneText;
+    document.getElementById('address-text').innerText = translations[lang].addressText;
+    document.getElementById('form-title').innerText = translations[lang].formTitle;
+    document.getElementById('label-name').innerText = translations[lang].labelName;
+    document.getElementById('label-email').innerText = translations[lang].labelEmail;
+    document.getElementById('label-mobile').innerText = translations[lang].labelMobile;
+    document.getElementById('label-message').innerText = translations[lang].labelMessage;
+    document.getElementById('submit-btn').innerText = translations[lang].submitBtn;
+}
+</script>
+
+</body>
+</html>

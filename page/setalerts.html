@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Kisan Crop Price Alert</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:white;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.container{
+background:white;
+padding:35px;
+width:420px;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,0.15);
+text-align:center;
+border:1px solid #ddd;
+}
+
+h1{
+color:#2e7d32;
+margin-bottom:8px;
+}
+
+.subtitle{
+color:#555;
+font-size:14px;
+margin-bottom:20px;
+}
+
+input,select,button{
+width:100%;
+padding:12px;
+margin-top:12px;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:15px;
+}
+
+button{
+background:#2e7d32;
+color:white;
+font-size:17px;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#1b5e20;
+}
+
+#message{
+margin-top:18px;
+font-weight:bold;
+font-size:16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 id="title">🌾 Smart Kisan</h1>
+<p class="subtitle" id="subtitle">Set crop price alert for farmers</p>
+
+<form id="alertForm">
+
+<input type="text" id="crop" placeholder="Enter Crop Name" required>
+
+<input type="number" id="minPrice" placeholder="Minimum Price ₹" required>
+
+<input type="number" id="maxPrice" placeholder="Maximum Price ₹" required>
+
+<select id="language" onchange="changeLanguage()">
+<option value="en">English</option>
+<option value="mr">मराठी</option>
+<option value="hi">हिंदी</option>
+</select>
+
+<button type="submit" id="btn">Set Alert</button>
+
+</form>
+
+<p id="message"></p>
+
+</div>
+
+<script>
+
+function changeLanguage(){
+
+let lang=document.getElementById("language").value;
+
+if(lang==="en"){
+document.getElementById("subtitle").innerText="Set crop price alert for farmers";
+document.getElementById("crop").placeholder="Enter Crop Name";
+document.getElementById("minPrice").placeholder="Minimum Price ₹";
+document.getElementById("maxPrice").placeholder="Maximum Price ₹";
+document.getElementById("btn").innerText="Set Alert";
+}
+
+if(lang==="mr"){
+document.getElementById("subtitle").innerText="शेतकऱ्यांसाठी पिकांच्या किंमतीचा अलर्ट सेट करा";
+document.getElementById("crop").placeholder="पिकाचे नाव लिहा";
+document.getElementById("minPrice").placeholder="किमान किंमत ₹";
+document.getElementById("maxPrice").placeholder="कमाल किंमत ₹";
+document.getElementById("btn").innerText="अलर्ट सेट करा";
+}
+
+if(lang==="hi"){
+document.getElementById("subtitle").innerText="किसानों के लिए फसल मूल्य अलर्ट सेट करें";
+document.getElementById("crop").placeholder="फसल का नाम दर्ज करें";
+document.getElementById("minPrice").placeholder="न्यूनतम मूल्य ₹";
+document.getElementById("maxPrice").placeholder="अधिकतम मूल्य ₹";
+document.getElementById("btn").innerText="अलर्ट सेट करें";
+}
+
+}
+
+document.getElementById("alertForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let min=document.getElementById("minPrice").value;
+let max=document.getElementById("maxPrice").value;
+let lang=document.getElementById("language").value;
+
+let currentPrice=Math.floor(Math.random()*10000)+1000;
+
+let msg="";
+
+if(currentPrice < min){
+
+if(lang==="en") msg="Price dropped to ₹ "+currentPrice;
+if(lang==="mr") msg="किंमत कमी झाली ₹ "+currentPrice;
+if(lang==="hi") msg="कीमत कम हो गई ₹ "+currentPrice;
+
+}
+else if(currentPrice > max){
+
+if(lang==="en") msg="Price increased to ₹ "+currentPrice;
+if(lang==="mr") msg="किंमत वाढली ₹ "+currentPrice;
+if(lang==="hi") msg="कीमत बढ़ गई ₹ "+currentPrice;
+
+}
+else{
+
+if(lang==="en") msg="Price in normal range ₹ "+currentPrice;
+if(lang==="mr") msg="किंमत सामान्य श्रेणीत ₹ "+currentPrice;
+if(lang==="hi") msg="कीमत सामान्य सीमा में ₹ "+currentPrice;
+
+}
+
+document.getElementById("message").innerHTML=msg;
+
+});
+
+</script>
+
+</body>
+</html>

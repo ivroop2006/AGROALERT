@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Register</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+}
+
+.container{
+width:350px;
+margin:auto;
+margin-top:50px;
+padding:20px;
+background:white;
+border-radius:8px;
+box-shadow:0 0 10px gray;
+}
+
+h2{
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+}
+
+button{
+width:100%;
+padding:10px;
+background:green;
+color:white;
+border:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Register</h2>
+
+<input type="text" id="name" placeholder="नाव / Name">
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="registerUser()">Register</button>
+
+</div>
+
+<script>
+
+function registerUser(){
+
+let name=document.getElementById("name").value;
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+
+let formData=new FormData();
+
+formData.append("name",name);
+formData.append("email",email);
+formData.append("password",password);
+
+fetch("../backend/api/users.php",{
+
+method:"POST",
+body:formData
+
+})
+
+.then(res=>res.text())
+.then(data=>{
+
+alert(data);
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

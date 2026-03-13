@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Expert Crop Selling Guide</title>
+
+<style>
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+margin:0;
+background:#f4f4f4;
+}
+
+header{
+background:green;
+color:white;
+text-align:center;
+padding:15px;
+font-size:24px;
+}
+
+.container{
+width:80%;
+margin:30px auto;
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+color:green;
+}
+
+.guide{
+background:#e6ffe6;
+padding:15px;
+margin-bottom:20px;
+border-radius:5px;
+}
+
+label{
+font-weight:bold;
+}
+
+input, textarea{
+width:100%;
+padding:8px;
+margin:8px 0 15px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+background:green;
+color:white;
+padding:10px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:darkgreen;
+}
+
+#message{
+text-align:center;
+color:green;
+font-weight:bold;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header id="header">
+Crop Price Alert System
+</header>
+
+<div class="container">
+
+<h2 id="title">Expert Crop Selling Guide</h2>
+
+<div class="guide">
+
+<h3 id="tipsTitle">Tips from Agriculture Experts</h3>
+
+<ul>
+<li id="tip1"></li>
+<li id="tip2"></li>
+<li id="tip3"></li>
+<li id="tip4"></li>
+<li id="tip5"></li>
+</ul>
+
+</div>
+
+<h3 id="askTitle">Ask Expert for Selling Advice</h3>
+
+<form id="expertForm">
+
+<label id="nameLabel">Farmer Name</label>
+<input type="text" id="name" required>
+
+<label id="cropLabel">Crop Name</label>
+<input type="text" id="crop" required>
+
+<label id="questionLabel">Your Question</label>
+<textarea id="question" rows="4" required></textarea>
+
+<button type="submit" id="sendBtn">Send Question</button>
+
+</form>
+
+<p id="message"></p>
+
+</div>
+
+<script>
+
+// language dictionary
+const translations = {
+
+en:{
+header:"Crop Price Alert System",
+title:"Expert Crop Selling Guide",
+tipsTitle:"Tips from Agriculture Experts",
+tips:[
+"Check the latest mandi price before selling crops.",
+"Clean and sort crops to get better market price.",
+"Use proper packaging to avoid crop damage.",
+"Sell crops in markets where demand is high.",
+"Store crops in dry and cool places before selling."
+],
+askTitle:"Ask Expert for Selling Advice",
+nameLabel:"Farmer Name",
+cropLabel:"Crop Name",
+questionLabel:"Your Question",
+sendBtn:"Send Question",
+success:"Your question has been sent to agriculture experts."
+},
+
+hi:{
+header:"फसल मूल्य अलर्ट सिस्टम",
+title:"विशेषज्ञ फसल बिक्री मार्गदर्शिका",
+tipsTitle:"कृषि विशेषज्ञों की सलाह",
+tips:[
+"फसल बेचने से पहले मंडी का नवीनतम भाव देखें।",
+"अच्छी कीमत पाने के लिए फसल को साफ और छांटकर रखें।",
+"फसल को नुकसान से बचाने के लिए सही पैकेजिंग करें।",
+"जहां मांग अधिक हो वहां फसल बेचें।",
+"फसल बेचने से पहले उसे सूखी और ठंडी जगह पर रखें।"
+],
+askTitle:"बिक्री सलाह के लिए विशेषज्ञ से पूछें",
+nameLabel:"किसान का नाम",
+cropLabel:"फसल का नाम",
+questionLabel:"आपका प्रश्न",
+sendBtn:"प्रश्न भेजें",
+success:"आपका प्रश्न कृषि विशेषज्ञों को भेज दिया गया है।"
+},
+
+mr:{
+header:"पीक किंमत अलर्ट सिस्टम",
+title:"तज्ञ पीक विक्री मार्गदर्शक",
+tipsTitle:"कृषी तज्ञांचे सल्ले",
+tips:[
+"पीक विकण्यापूर्वी मंडईचा ताजा भाव तपासा.",
+"चांगली किंमत मिळण्यासाठी पीक स्वच्छ करून वर्गीकरण करा.",
+"पीक खराब होऊ नये म्हणून योग्य पॅकिंग वापरा.",
+"ज्या बाजारात मागणी जास्त आहे तिथे पीक विक्री करा.",
+"पीक विकण्यापूर्वी ते कोरड्या व थंड ठिकाणी साठवा."
+],
+askTitle:"विक्री सल्ल्यासाठी तज्ञांना विचारा",
+nameLabel:"शेतकऱ्याचे नाव",
+cropLabel:"पीक नाव",
+questionLabel:"तुमचा प्रश्न",
+sendBtn:"प्रश्न पाठवा",
+success:"तुमचा प्रश्न कृषी तज्ञांकडे पाठवला गेला आहे."
+}
+
+};
+
+// get selected language
+let lang = localStorage.getItem("selectedLanguage") || "en";
+
+function applyLanguage(){
+
+let t = translations[lang];
+
+document.getElementById("header").innerText=t.header;
+document.getElementById("title").innerText=t.title;
+document.getElementById("tipsTitle").innerText=t.tipsTitle;
+
+document.getElementById("tip1").innerText=t.tips[0];
+document.getElementById("tip2").innerText=t.tips[1];
+document.getElementById("tip3").innerText=t.tips[2];
+document.getElementById("tip4").innerText=t.tips[3];
+document.getElementById("tip5").innerText=t.tips[4];
+
+document.getElementById("askTitle").innerText=t.askTitle;
+document.getElementById("nameLabel").innerText=t.nameLabel;
+document.getElementById("cropLabel").innerText=t.cropLabel;
+document.getElementById("questionLabel").innerText=t.questionLabel;
+document.getElementById("sendBtn").innerText=t.sendBtn;
+
+}
+
+applyLanguage();
+
+document.getElementById("expertForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+document.getElementById("message").innerText=translations[lang].success;
+
+document.getElementById("expertForm").reset();
+
+});
+
+</script>
+
+</body>
+</html>

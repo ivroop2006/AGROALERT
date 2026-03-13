@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Farmers Mandi Chat</title>
+
+<style>
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+margin:0;
+background:#f4f4f4;
+}
+
+header{
+background:green;
+color:white;
+text-align:center;
+padding:15px;
+font-size:24px;
+}
+
+.container{
+width:400px;
+margin:40px auto;
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+#chatBox{
+height:300px;
+border:1px solid #ccc;
+overflow-y:auto;
+padding:10px;
+margin-bottom:10px;
+background:#fafafa;
+}
+
+.message{
+padding:8px;
+margin:5px 0;
+border-radius:5px;
+max-width:80%;
+}
+
+.user{
+background:#e6ffe6;
+text-align:right;
+margin-left:auto;
+}
+
+.mandi{
+background:#e6f0ff;
+}
+
+input{
+width:75%;
+padding:8px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+width:22%;
+padding:8px;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:darkgreen;
+}
+
+</style>
+</head>
+
+<body>
+
+<header id="headerText">
+Crop Price Alert System - Farmers Chat
+</header>
+
+<div class="container">
+
+<h3 id="chatTitle" style="text-align:center;">Mandi Farmer Chat</h3>
+
+<div id="chatBox"></div>
+
+<input type="text" id="messageInput">
+
+<button id="sendBtn" onclick="sendMessage()">Send</button>
+
+</div>
+
+<script>
+
+/* Language Data */
+
+const text = {
+
+en:{
+header:"Crop Price Alert System - Farmers Chat",
+title:"Mandi Farmer Chat",
+placeholder:"Type your message...",
+send:"Send",
+reply:"Mandi: We received your message. Price information will be updated soon."
+},
+
+hi:{
+header:"फसल मूल्य अलर्ट सिस्टम - किसान चैट",
+title:"मंडी किसान चैट",
+placeholder:"अपना संदेश लिखें...",
+send:"भेजें",
+reply:"मंडी: आपका संदेश मिल गया है। कीमत की जानकारी जल्द अपडेट होगी।"
+},
+
+mr:{
+header:"पीक किंमत अलर्ट प्रणाली - शेतकरी चॅट",
+title:"मंडी शेतकरी चॅट",
+placeholder:"तुमचा संदेश लिहा...",
+send:"पाठवा",
+reply:"मंडी: तुमचा संदेश मिळाला आहे. किंमत माहिती लवकर अपडेट होईल."
+}
+
+};
+
+/* Language from previous page */
+
+let lang = localStorage.getItem("lang") || "en";
+
+/* Apply language */
+
+document.getElementById("headerText").innerText = text[lang].header;
+document.getElementById("chatTitle").innerText = text[lang].title;
+document.getElementById("messageInput").placeholder = text[lang].placeholder;
+document.getElementById("sendBtn").innerText = text[lang].send;
+
+/* Chat Function */
+
+function sendMessage(){
+
+let input=document.getElementById("messageInput");
+let message=input.value;
+
+if(message.trim()===""){
+return;
+}
+
+let chatBox=document.getElementById("chatBox");
+
+/* Farmer Message */
+
+let userMsg=document.createElement("div");
+userMsg.className="message user";
+userMsg.innerText="Farmer: "+message;
+
+chatBox.appendChild(userMsg);
+
+/* Clear input */
+
+input.value="";
+
+/* Auto reply from Mandi */
+
+setTimeout(function(){
+
+let mandiMsg=document.createElement("div");
+mandiMsg.className="message mandi";
+mandiMsg.innerText=text[lang].reply;
+
+chatBox.appendChild(mandiMsg);
+
+chatBox.scrollTop=chatBox.scrollHeight;
+
+},1000);
+
+chatBox.scrollTop=chatBox.scrollHeight;
+
+}
+
+</script>
+
+</body>
+</html>

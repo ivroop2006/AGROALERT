@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sell Crop Directly to Buyer</title>
+
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0;
+    background:#f4f4f4;
+}
+
+header{
+    background:green;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:24px;
+}
+
+.container{
+    width:420px;
+    margin:40px auto;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h3{
+    text-align:center;
+}
+
+label{
+    font-weight:bold;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:8px;
+    margin:8px 0 15px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    background:green;
+    color:white;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:darkgreen;
+}
+
+#message{
+    text-align:center;
+    color:green;
+    font-weight:bold;
+    margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header id="header">Crop Price Alert System</header>
+
+<div class="container">
+
+<h3 id="formTitle">Sell Crop Directly to Buyer</h3>
+
+<form id="sellForm">
+
+<label id="labelFarmer">Farmer Name</label>
+<input type="text" id="farmer" required>
+
+<label id="labelCrop">Crop Name</label>
+<input type="text" id="crop" required>
+
+<label id="labelQuantity">Quantity (in Kg)</label>
+<input type="number" id="quantity" required>
+
+<label id="labelPrice">Expected Price (₹ per Kg)</label>
+<input type="number" id="price" required>
+
+<label id="labelLocation">Location / Village</label>
+<input type="text" id="location" required>
+
+<label id="labelContact">Contact Number</label>
+<input type="tel" id="contact" required>
+
+<label id="labelDetails">Additional Details</label>
+<textarea id="details" rows="3"></textarea>
+
+<button type="submit" id="submitBtn">Post Crop for Sale</button>
+
+</form>
+
+<p id="message"></p>
+
+</div>
+
+<script>
+// Translation dictionary
+const translations = {
+    "en": {
+        "header": "Crop Price Alert System",
+        "formTitle": "Sell Crop Directly to Buyer",
+        "labelFarmer": "Farmer Name",
+        "labelCrop": "Crop Name",
+        "labelQuantity": "Quantity (in Kg)",
+        "labelPrice": "Expected Price (₹ per Kg)",
+        "labelLocation": "Location / Village",
+        "labelContact": "Contact Number",
+        "labelDetails": "Additional Details",
+        "submitBtn": "Post Crop for Sale",
+        "successMessage": "Your crop has been posted successfully. Buyers can contact you."
+    },
+    "hi": {
+        "header": "फसल मूल्य अलर्ट सिस्टम",
+        "formTitle": "किसान सीधे खरीदार को फसल बेचें",
+        "labelFarmer": "किसान का नाम",
+        "labelCrop": "फसल का नाम",
+        "labelQuantity": "मात्रा (किग्रा में)",
+        "labelPrice": "अपेक्षित मूल्य (₹ प्रति किग्रा)",
+        "labelLocation": "स्थान / गाँव",
+        "labelContact": "संपर्क नंबर",
+        "labelDetails": "अतिरिक्त विवरण",
+        "submitBtn": "फसल पोस्ट करें",
+        "successMessage": "आपकी फसल सफलतापूर्वक पोस्ट की गई है। खरीदार आपसे संपर्क कर सकते हैं।"
+    },
+    "mr": {
+        "header": "पीक किंमत अलर्ट सिस्टम",
+        "formTitle": "शेतकरी थेट खरेदीदाराला पीक विक्री करा",
+        "labelFarmer": "शेतकऱ्याचे नाव",
+        "labelCrop": "पीक नाव",
+        "labelQuantity": "प्रमाण (किलो मध्ये)",
+        "labelPrice": "अपेक्षित किंमत (₹ प्रति किलो)",
+        "labelLocation": "स्थान / गाव",
+        "labelContact": "संपर्क क्रमांक",
+        "labelDetails": "अतिरिक्त तपशील",
+        "submitBtn": "पीक पोस्ट करा",
+        "successMessage": "तुमचे पीक यशस्वीरीत्या पोस्ट केले गेले आहे. खरेदीदार तुमच्याशी संपर्क करू शकतात."
+    }
+};
+
+// Get previously selected language (from previous page)
+let lang = localStorage.getItem("selectedLanguage") || "en";
+
+// Function to apply language
+function applyLanguage(lang) {
+    const t = translations[lang];
+    document.getElementById("header").innerText = t.header;
+    document.getElementById("formTitle").innerText = t.formTitle;
+    document.getElementById("labelFarmer").innerText = t.labelFarmer;
+    document.getElementById("labelCrop").innerText = t.labelCrop;
+    document.getElementById("labelQuantity").innerText = t.labelQuantity;
+    document.getElementById("labelPrice").innerText = t.labelPrice;
+    document.getElementById("labelLocation").innerText = t.labelLocation;
+    document.getElementById("labelContact").innerText = t.labelContact;
+    document.getElementById("labelDetails").innerText = t.labelDetails;
+    document.getElementById("submitBtn").innerText = t.submitBtn;
+}
+
+applyLanguage(lang);
+
+// Form submit
+document.getElementById("sellForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("message").innerText = translations[lang].successMessage;
+    document.getElementById("sellForm").reset();
+});
+</script>
+
+</body>
+</html>

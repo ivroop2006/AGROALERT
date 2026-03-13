@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Crop Price Alert System - Services</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f4f4;
+}
+
+header{
+background:green;
+color:white;
+padding:15px;
+text-align:center;
+font-size:24px;
+}
+
+.container{
+padding:20px;
+}
+
+.section{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:6px;
+box-shadow:0 0 5px rgba(0,0,0,0.2);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header id="title"></header>
+
+<div class="container">
+
+<p id="description"></p>
+
+<div class="section" id="service1"></div>
+<div class="section" id="service2"></div>
+<div class="section" id="service3"></div>
+<div class="section" id="service4"></div>
+
+</div>
+
+<script>
+
+/* Get language from previous page */
+var lang = localStorage.getItem("language");
+
+/* Default English if nothing selected */
+if(!lang){
+lang="en";
+}
+
+if(lang=="mr"){
+
+document.getElementById("title").innerText="पीक किंमत सूचना प्रणाली - सेवा";
+
+document.getElementById("description").innerText=
+"आमची पीक किंमत सूचना प्रणाली शेतकऱ्यांना बाजारातील पिकांच्या किमती तपासण्यास आणि योग्य वेळी पीक विकण्याचा निर्णय घेण्यास मदत करते.";
+
+document.getElementById("service1").innerText=
+"पीक किंमत निरीक्षण: शेतकरी विविध पिकांचे बाजारभाव सहज तपासू शकतात.";
+
+document.getElementById("service2").innerText=
+"किंमत सूचना: जेव्हा पिकाची किंमत आपल्या अपेक्षित मर्यादेपर्यंत पोहोचते तेव्हा सूचना मिळते.";
+
+document.getElementById("service3").innerText=
+"नफा कॅल्क्युलेटर: शेतकरी पिकांमधून मिळणारा संभाव्य नफा मोजू शकतात.";
+
+document.getElementById("service4").innerText=
+"बाजार अद्यतने: शेतकऱ्यांना नवीन बाजार माहिती आणि शेती संबंधित अपडेट मिळतात.";
+
+}
+
+else if(lang=="hi"){
+
+document.getElementById("title").innerText="फसल मूल्य अलर्ट सिस्टम - सेवाएं";
+
+document.getElementById("description").innerText=
+"हमारा फसल मूल्य अलर्ट सिस्टम किसानों को बाजार में फसल की कीमतों को ट्रैक करने और सही समय पर फसल बेचने का निर्णय लेने में मदद करता है।";
+
+document.getElementById("service1").innerText=
+"फसल मूल्य निगरानी: किसान विभिन्न फसलों के बाजार मूल्य आसानी से देख सकते हैं।";
+
+document.getElementById("service2").innerText=
+"मूल्य अलर्ट सूचनाएं: जब फसल की कीमत आपके लक्ष्य तक पहुंचती है तो आपको सूचना मिलती है।";
+
+document.getElementById("service3").innerText=
+"लाभ कैलकुलेटर: किसान अपनी फसल से होने वाले संभावित लाभ की गणना कर सकते हैं।";
+
+document.getElementById("service4").innerText=
+"बाजार अपडेट: किसानों को नवीनतम कृषि बाजार समाचार और अपडेट मिलते हैं।";
+
+}
+
+else{
+
+document.getElementById("title").innerText="Crop Price Alert System - Services";
+
+document.getElementById("description").innerText=
+"Our Crop Price Alert System helps farmers track crop market prices and make better selling decisions at the right time.";
+
+document.getElementById("service1").innerText=
+"Crop Price Monitoring: Farmers can easily check the market prices of different crops.";
+
+document.getElementById("service2").innerText=
+"Price Alert Notifications: Farmers receive alerts when crop prices reach their target value.";
+
+document.getElementById("service3").innerText=
+"Profit Calculator: Farmers can calculate the estimated profit from their crops.";
+
+document.getElementById("service4").innerText=
+"Market Updates: Farmers get the latest agricultural market news and updates.";
+
+}
+
+</script>
+
+</body>
+</html>
