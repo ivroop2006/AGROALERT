@@ -150,7 +150,7 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
     }
 
     // Send login request with language
-    fetch('../backend/api/login.php', {
+    fetch('/backend/api/login.php', {
         method: 'POST',
         body: new URLSearchParams({email: email, password: password, lang: lang})
     })
